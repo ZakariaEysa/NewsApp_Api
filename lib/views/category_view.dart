@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_ui_setup/views/Category_View_Rows.dart';
+import 'category_view_rows.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, this.categoryName, this.image});
@@ -14,8 +14,8 @@ class CategoryCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) {
-            return Category_view_Row(
-              categoryname: categoryName,
+            return CategoryViewRow(
+              categoryName: categoryName!,
             );
           },
         ));

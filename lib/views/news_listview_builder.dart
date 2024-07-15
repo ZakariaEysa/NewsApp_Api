@@ -1,24 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app_ui_setup/ArticleModels.dart';
-import 'package:news_app_ui_setup/serveses/newsServes.dart';
-import 'package:news_app_ui_setup/views/newslistview.dart';
+import '../article_models.dart';
+import '../services/news_services.dart';
+import 'news_listview.dart';
 
-class newslistviewbuilder extends StatefulWidget {
-  newslistviewbuilder({super.key, required this.CategoryType});
-  String CategoryType;
+class NewsListViewBuilder extends StatefulWidget {
+  const NewsListViewBuilder({super.key, required this.categoryType});
+  final String categoryType;
 
   @override
-  State<newslistviewbuilder> createState() => _newslistviewbuilderState();
+  State<NewsListViewBuilder> createState() => _NewsListViewBuilderState();
 }
 
-class _newslistviewbuilderState extends State<newslistviewbuilder> {
+class _NewsListViewBuilderState extends State<NewsListViewBuilder> {
   var future;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    future = newServes(Dio()).getNews(Ccategory: widget.CategoryType);
+    future = NewsServices(Dio()).getNews(category: widget.categoryType);
   }
 
   @override
@@ -27,7 +27,7 @@ class _newslistviewbuilderState extends State<newslistviewbuilder> {
       future: future,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return NewsListView(listy: snapshot.data!);
+          return NewsListView(list: snapshot.data!);
         } else if (snapshot.hasError) {
           return const SliverToBoxAdapter(
             child: Text("oops there was an error , try later "),

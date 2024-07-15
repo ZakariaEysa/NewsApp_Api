@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_ui_setup/ArticleModels.dart';
+import '../article_models.dart';
 
-// cached network image
 class NewsTile extends StatelessWidget {
   const NewsTile({super.key, required this.article});
   final ArticleModel article;
 
-  // final ArticleModel articleModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +20,7 @@ class NewsTile extends StatelessWidget {
                     fit: BoxFit.fill,
                   )
                 : Image.asset(
-                    'assets/entertaiment.avif',
+                    'assets/holder.png',
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.fill,

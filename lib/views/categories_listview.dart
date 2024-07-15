@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../CategoryModel.dart';
+import '../category_model.dart';
 import 'category_view.dart';
 
 class ListViewCard extends StatelessWidget {
@@ -8,13 +8,13 @@ class ListViewCard extends StatelessWidget {
     super.key,
   });
 
-  static const List<CategoryModel> listy = [
+  static const List<CategoryModel> list = [
     CategoryModel(
       image: 'assets/business.avif',
       categoryName: 'business',
     ),
     CategoryModel(
-      image: 'assets/entertaiment.avif',
+      image: 'assets/entertaiment.jpeg',
       categoryName: 'entertainment',
     ),
     CategoryModel(
@@ -45,13 +45,13 @@ class ListViewCard extends StatelessWidget {
       height: 65,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: listy.length,
+        itemCount: list.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: CategoryCard(
-                image: listy[index].image,
-                categoryName: listy[index].categoryName),
+                image: list[index].image,
+                categoryName: list[index].categoryName),
           );
         },
       ),

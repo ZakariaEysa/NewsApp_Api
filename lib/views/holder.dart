@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:news_app_ui_setup/ArticleModels.dart';
-import 'package:news_app_ui_setup/serveses/newsServes.dart';
-import 'package:news_app_ui_setup/views/news_tile.dart';
+import '../article_models.dart';
+import '../services/news_services.dart';
+import 'news_tile.dart';
 
 class NewsListView extends StatefulWidget {
-  const NewsListView( {
-
-  super.key, required List<ArticleModel> listy,
+  const NewsListView({
+    super.key,
+    required List<ArticleModel> list,
   });
 
   @override
@@ -15,34 +15,35 @@ class NewsListView extends StatefulWidget {
 }
 
 class _NewsListViewState extends State<NewsListView> {
-  List<ArticleModel> listy = [];
-  bool isloading = true;
+  List<ArticleModel> list = [];
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
-    getnewsGeneral();
+    getNewsGeneral();
   }
 
-  Future<void> getnewsGeneral() async {
-    listy = await newServes(Dio()).getNews(Ccategory: '');
-    isloading = false;
+  Future<void> getNewsGeneral() async {
+    list = await NewsServices(Dio()).getNews(category: '');
+    isLoading = false;
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return isloading
-        ? SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
+    return isLoading
+        ? const SliverToBoxAdapter(
+            child: Center(child: CircularProgressIndicator()))
         : SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: listy.length,
-            (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 22),
-            child: NewsTile(article: listy[index]),
+            delegate: SliverChildBuilderDelegate(
+              childCount: list.length,
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 22),
+                  child: NewsTile(article: list[index]),
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
   }
 }
